@@ -24,7 +24,7 @@ Create and activate a virtual environment (optional but recommended).
 3. Install Dependencies
 Install the required packages using requirements.txt.
 
-    ```pip install -r requirements.txt
+    pip install -r requirements.txt
 
 
 4. Running the Script
@@ -32,5 +32,5 @@ Install the required packages using requirements.txt.
 Place your dataset in the same directory or modify the script to point to your dataset.
 Run the analysis script.
 
-    ```python test_gmmchi.py
+    python test_gmmchi.py
     

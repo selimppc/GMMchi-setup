@@ -33,5 +33,7 @@ Install the required packages using requirements.txt.
 Place your dataset in the same directory or modify the script to point to your dataset.
 Run the analysis script.
 
+    ```
     python test_gmmchi.py
+    ```
     

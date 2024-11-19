@@ -24,7 +24,9 @@ Create and activate a virtual environment (optional but recommended).
 3. Install Dependencies
 Install the required packages using requirements.txt.
 
+    ```
     pip install -r requirements.txt
+    ```
 
 4. Running the Script
 

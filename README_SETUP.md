@@ -26,7 +26,6 @@ Install the required packages using requirements.txt.
 
     pip install -r requirements.txt
 
-
 4. Running the Script
 
 Place your dataset in the same directory or modify the script to point to your dataset.

@@ -1,7 +1,9 @@
 import numpy as np
 import pandas as pd
-from tqdm import tqdm_notebook as tqdm
+# from tqdm import tqdm_notebook as tqdm
 import math
+from tqdm import tqdm
+
 
 
 def probe_filter(datainputnorm, log2transform=False, filt=0, threshold_filter=0.01, variance_filter=0.0125):
@@ -45,7 +47,8 @@ def probe_filter(datainputnorm, log2transform=False, filt=0, threshold_filter=0.
         data.replace(np.nan, filt-1, inplace=True)
         aa = []
         var = []
-        for a in tqdm(range(0, len(data))):
+        # for a in tqdm(range(0, len(data))):
+        for a in tqdm(range(0, len(data)), desc="Processing Data"):
             percent = sum(data.iloc[a, :] >= filt)
             aa.append(percent)
 

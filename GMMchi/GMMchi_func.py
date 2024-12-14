@@ -21,12 +21,13 @@ import matplotlib.patches as mpatches
 import pandas as pd
 from scipy import stats
 import numpy as np
-import matplotlib as plt
+# import matplotlib as plt
 import seaborn as sns
 sns.set(color_codes=True)
 mpl.rcParams['figure.dpi'] = 300
 warnings.filterwarnings("ignore")
 
+import matplotlib.pyplot as plt
 
 from .dynamic_binning import *
 from .solve_gaussians import*
@@ -894,7 +895,13 @@ def GMM_plot(input_data, data, datanorm, input_datanorm, categories, verbosity, 
     # initialize f
     f = 0
     if graphs == True:
-        f, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=[18, 14.5])
+        # f, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=[18, 14.5])
+        f = plt.figure(figsize=[18, 14.5])
+        ax1 = f.add_subplot(221)
+        ax2 = f.add_subplot(222)
+        ax3 = f.add_subplot(223)
+        ax4 = f.add_subplot(224)
+
         ax1.yaxis.set_major_locator(MaxNLocator(integer=True))
 
         axisfont = 18
@@ -926,7 +933,8 @@ def GMM_plot(input_data, data, datanorm, input_datanorm, categories, verbosity, 
                                         bins=np.logspace(np.log2(np.min(x_axis)), np.log2(np.max(x_axis)), num=nums, base=2), histtype='barstacked', alpha=0.5, ec='black')
             ax1.set_ylabel('Number of Samples', fontsize=axisfont)
             ax1.set_xlabel('Expression Value (log2)', fontsize=axisfont)
-            ax1.set_xscale('log', basex=2)
+            # ax1.set_xscale('log', basex=2)
+            ax1.set_xscale('log', base=2)
 
             # take out the 2^ just have the powers
             logfmt = tick.LogFormatterExponent(base=2.0, labelOnlyBase=True)

@@ -1,5 +1,7 @@
 import GMMchi
 import pandas as pd
+from tqdm import tqdm
+import matplotlib.pyplot as plt
 
 # Expanded dataset with more samples to ensure robust calculations
 data = {
@@ -32,7 +34,7 @@ results = GMMchi.GMM_modelingt(
     verbosity=True,
     calc_back=False,
     filt=0.5,
-    graphs=False
+    graphs=True
 )
 
 # Unpack results
@@ -46,3 +48,31 @@ print("Weights:", weights)
 print("Classification:", classif)
 print("Categories:", categories)
 print("Chi-square:", chi)
+
+input_dataf = GMMchi.probe_filter(datainputnorm=preprocessed_data,
+                                  log2transform=True,
+                                  filt=-0.829)
+
+genes = input_dataf.index  # the index of the dataframe or a list of all genes
+categorize = []  # append as list of list of categorized data
+
+for gene in tqdm(genes):
+    info, classif, categories, chi, bins, f = GMMchi.GMM_modelingt(gene, input_dataf, log2transform=True, filt=6.5924,
+                                                                   meanf=5.14, stdf=1.01)
+
+    categorize.append(categories)
+
+    del classif, categories, chi  # free up memory
+
+categorized_df = pd.DataFrame(categorize, index=input_dataf.index, columns=input_dataf.columns)
+
+# Run a 2x2 Table Analysis
+print("categorized_df = ", categorized_df)
+hits, significant_hits, table_sig_hits = GMMchi.find_hits(categorized_df, primary="Sample5")
+
+twobytwo_table = pd.DataFrame(table_sig_hits,
+                              columns=['+/+', '+/-', '-/+', '-/-', 'p-value', 'R value', 'Inclusion Criterion'],
+                              index=significant_hits.T.columns[1:])
+
+# Save your 2x2 table for further analysis
+twobytwo_table.sort_values('R value', ascending=False).to_csv(r'test.csv')

@@ -1,6 +1,7 @@
 from .GMMchi_func import *
 from .dynamic_binning import *
 from .solve_gaussians import *
+import matplotlib.pyplot as plt
 
 def GMM_modelingt(ID, input_datanormal, log2transform=True, dynamic_binning_s=True, tune_factor=0.99, filt=None, verbosity=False, graphs=True,
                   graph_show=True, farinto=0.01, meanf=0, calc_back=False, stdf=0, chisquaremethod=True, unimodal_categories=True,
